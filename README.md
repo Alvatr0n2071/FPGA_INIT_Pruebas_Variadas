@@ -1,0 +1,2 @@
+Para la prueba4_i2c_oled usé un codigo verilog de referencia el cual se encuentra en el siguiente link: [https://www.annabooks.com/Articles/Articles_FPGA/Altera-FPGA-NIOS-V.pdf](https://www.annabooks.com/Articles/Articles_FPGA/Intel-FPGA-NIOS-II-I2C-Rev1.2.pdf)
+Basicamente te dice que el ip core del modulo master del i2c no genera corectamente los pines sda y scl por lo que se debe crear un top level que reajuste los pines en modo tristate, mas info en el link adjunto
