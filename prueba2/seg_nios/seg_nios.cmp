@@ -1,0 +1,8 @@
+	component seg_nios is
+		port (
+			clk_clk    : in  std_logic                    := 'X'; -- clk
+			mux_export : out std_logic_vector(3 downto 0);        -- export
+			seg_export : out std_logic_vector(7 downto 0)         -- export
+		);
+	end component seg_nios;
+

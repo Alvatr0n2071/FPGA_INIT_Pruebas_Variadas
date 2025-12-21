@@ -1,0 +1,16 @@
+Analysis & Synthesis Status : Successful - Wed Dec 17 14:15:03 2025
+Quartus Prime Version : 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+Revision Name : seg_nios
+Top-level Entity Name : seg_nios
+Family : MAX 10
+Total logic elements : 1,843
+    Total combinational functions : 1,652
+    Dedicated logic registers : 946
+Total registers : 946
+Total pins : 13
+Total virtual pins : 0
+Total memory bits : 44,032
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0
+UFM blocks : 0
+ADC blocks : 0

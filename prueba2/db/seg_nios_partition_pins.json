@@ -1,0 +1,77 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "mux_export[0]",
+					"strict" : false
+				},
+				{
+					"name" : "mux_export[1]",
+					"strict" : false
+				},
+				{
+					"name" : "mux_export[2]",
+					"strict" : false
+				},
+				{
+					"name" : "mux_export[3]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_export[0]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_export[1]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_export[2]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_export[3]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_export[4]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_export[5]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_export[6]",
+					"strict" : false
+				},
+				{
+					"name" : "seg_export[7]",
+					"strict" : false
+				},
+				{
+					"name" : "clk_clk",
+					"strict" : false
+				},
+				{
+					"name" : "altera_reserved_tms",
+					"strict" : false
+				},
+				{
+					"name" : "altera_reserved_tck",
+					"strict" : false
+				},
+				{
+					"name" : "altera_reserved_tdi",
+					"strict" : false
+				},
+				{
+					"name" : "altera_reserved_tdo",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

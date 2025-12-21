@@ -1,0 +1,12 @@
+Power Analyzer Status : Successful - Sat Dec 20 18:06:49 2025
+Quartus Prime Version : 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+Revision Name : i2c_oled_ni2
+Top-level Entity Name : NIOS2i2c
+Family : MAX 10
+Device : 10M08SCE144C8G
+Power Models : Final
+Total Thermal Power Dissipation : 127.88 mW
+Core Dynamic Thermal Power Dissipation : 1.79 mW
+Core Static Thermal Power Dissipation : 110.64 mW
+I/O Thermal Power Dissipation : 15.45 mW
+Power Estimation Confidence : Low: user provided insufficient toggle rate data

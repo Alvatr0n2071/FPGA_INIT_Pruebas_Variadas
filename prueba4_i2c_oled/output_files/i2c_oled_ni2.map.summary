@@ -1,0 +1,16 @@
+Analysis & Synthesis Status : Successful - Sat Dec 20 18:06:34 2025
+Quartus Prime Version : 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+Revision Name : i2c_oled_ni2
+Top-level Entity Name : NIOS2i2c
+Family : MAX 10
+Total logic elements : 2,603
+    Total combinational functions : 2,321
+    Dedicated logic registers : 1,324
+Total registers : 1324
+Total pins : 9
+Total virtual pins : 0
+Total memory bits : 139,336
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0
+UFM blocks : 0
+ADC blocks : 0
