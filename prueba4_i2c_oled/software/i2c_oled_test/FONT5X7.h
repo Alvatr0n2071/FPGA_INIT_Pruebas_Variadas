@@ -3,8 +3,7 @@
 
 #include <stdint.h>
 
-// 5x7 font, ASCII 32..127 (96 chars). Cada entrada: 5 columnas (LSB arriba).
-// Mapeo: index = (c - 32). Si c < 32 o c > 127 -> reemplazar por '?'
+
 static const uint8_t FONT5X7[96][5] = {
   {0x00,0x00,0x00,0x00,0x00}, // ' '
   {0x00,0x00,0x5F,0x00,0x00}, // '!'
