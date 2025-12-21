@@ -1,0 +1,27 @@
+|seg
+digitos_in[0] => digitos_out[0].DATAIN
+digitos_in[1] => digitos_out[1].DATAIN
+digitos_in[2] => digitos_out[2].DATAIN
+digitos_in[3] => digitos_out[3].DATAIN
+digitos_in[4] => digitos_out[4].DATAIN
+digitos_in[5] => digitos_out[5].DATAIN
+digitos_in[6] => digitos_out[6].DATAIN
+digitos_in[7] => digitos_out[7].DATAIN
+mux[0] => mux_out[0].DATAIN
+mux[1] => mux_out[1].DATAIN
+mux[2] => mux_out[2].DATAIN
+mux[3] => mux_out[3].DATAIN
+mux_out[0] << mux[0].DB_MAX_OUTPUT_PORT_TYPE
+mux_out[1] << mux[1].DB_MAX_OUTPUT_PORT_TYPE
+mux_out[2] << mux[2].DB_MAX_OUTPUT_PORT_TYPE
+mux_out[3] << mux[3].DB_MAX_OUTPUT_PORT_TYPE
+digitos_out[0] << digitos_in[0].DB_MAX_OUTPUT_PORT_TYPE
+digitos_out[1] << digitos_in[1].DB_MAX_OUTPUT_PORT_TYPE
+digitos_out[2] << digitos_in[2].DB_MAX_OUTPUT_PORT_TYPE
+digitos_out[3] << digitos_in[3].DB_MAX_OUTPUT_PORT_TYPE
+digitos_out[4] << digitos_in[4].DB_MAX_OUTPUT_PORT_TYPE
+digitos_out[5] << digitos_in[5].DB_MAX_OUTPUT_PORT_TYPE
+digitos_out[6] << digitos_in[6].DB_MAX_OUTPUT_PORT_TYPE
+digitos_out[7] << digitos_in[7].DB_MAX_OUTPUT_PORT_TYPE
+
+

@@ -1,0 +1,105 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "mux_out[0]",
+					"strict" : false
+				},
+				{
+					"name" : "mux_out[1]",
+					"strict" : false
+				},
+				{
+					"name" : "mux_out[2]",
+					"strict" : false
+				},
+				{
+					"name" : "mux_out[3]",
+					"strict" : false
+				},
+				{
+					"name" : "digitos_out[0]",
+					"strict" : false
+				},
+				{
+					"name" : "digitos_out[1]",
+					"strict" : false
+				},
+				{
+					"name" : "digitos_out[2]",
+					"strict" : false
+				},
+				{
+					"name" : "digitos_out[3]",
+					"strict" : false
+				},
+				{
+					"name" : "digitos_out[4]",
+					"strict" : false
+				},
+				{
+					"name" : "digitos_out[5]",
+					"strict" : false
+				},
+				{
+					"name" : "digitos_out[6]",
+					"strict" : false
+				},
+				{
+					"name" : "digitos_out[7]",
+					"strict" : false
+				},
+				{
+					"name" : "mux[0]",
+					"strict" : false
+				},
+				{
+					"name" : "mux[1]",
+					"strict" : false
+				},
+				{
+					"name" : "mux[2]",
+					"strict" : false
+				},
+				{
+					"name" : "mux[3]",
+					"strict" : false
+				},
+				{
+					"name" : "digitos_in[0]",
+					"strict" : false
+				},
+				{
+					"name" : "digitos_in[1]",
+					"strict" : false
+				},
+				{
+					"name" : "digitos_in[2]",
+					"strict" : false
+				},
+				{
+					"name" : "digitos_in[3]",
+					"strict" : false
+				},
+				{
+					"name" : "digitos_in[4]",
+					"strict" : false
+				},
+				{
+					"name" : "digitos_in[5]",
+					"strict" : false
+				},
+				{
+					"name" : "digitos_in[6]",
+					"strict" : false
+				},
+				{
+					"name" : "digitos_in[7]",
+					"strict" : false
+				}
+			]
+		}
+	]
+}
