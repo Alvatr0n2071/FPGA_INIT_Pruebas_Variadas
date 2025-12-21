@@ -28,16 +28,15 @@ int oled_begin(oled_t *o, ALT_AVALON_I2C_DEV_t *i2c, uint8_t addr) {
   o->i2c = i2c;
   o->addr = addr;
 
-  // Probe simple
   if (!oled_cmd(o, 0xAE)) return 0;
 
-  // Init típico SSD1306 128x64
+  //init clasico de SSD1306
   oled_cmd(o, 0xD5); oled_cmd(o, 0x80);
   oled_cmd(o, 0xA8); oled_cmd(o, 0x3F);
   oled_cmd(o, 0xD3); oled_cmd(o, 0x00);
   oled_cmd(o, 0x40);
   oled_cmd(o, 0x8D); oled_cmd(o, 0x14);
-  oled_cmd(o, 0x20); oled_cmd(o, 0x00); // horizontal
+  oled_cmd(o, 0x20); oled_cmd(o, 0x00); //horizontal
   oled_cmd(o, 0xA1);
   oled_cmd(o, 0xC8);
   oled_cmd(o, 0xDA); oled_cmd(o, 0x12);
@@ -65,7 +64,7 @@ void oled_set_cursor(oled_t *o, uint8_t page, uint8_t col) {
 }
 
 void oled_clear(oled_t *o) {
-  // full window
+  //full window
   oled_cmd(o, 0x21); oled_cmd(o, 0); oled_cmd(o, 127);
   oled_cmd(o, 0x22); oled_cmd(o, 0); oled_cmd(o, 7);
 
@@ -76,7 +75,7 @@ void oled_clear(oled_t *o) {
 }
 
 void oled_putc(oled_t *o, char c) {
-  // map a tabla
+  //map a tabla
   uint8_t uc = (uint8_t)c;
   if (uc < 32 || uc > 127) uc = (uint8_t)'?';
   const uint8_t *g = FONT5X7[uc - 32];
@@ -91,11 +90,9 @@ void oled_print(oled_t *o, const char *s) {
 }
 
 void oled_print_line(oled_t *o, uint8_t line, const char *s) {
-  // cada línea = 1 page (8px)
   if (line > 7) line = 7;
   oled_set_cursor(o, line, 0);
 
-  // imprime hasta llenar (21 chars aprox: 128/6=21)
   for (int i = 0; i < 21 && s[i]; i++) {
     oled_putc(o, s[i]);
   }
