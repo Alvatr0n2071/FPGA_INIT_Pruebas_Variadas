@@ -1,0 +1,87 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity servo_ua is
+    port (
+        clk         : in    std_logic; -- 50 MHz
+        reset_n     : in    std_logic; -- Botón
+        
+        -- UART hacia PC
+        uart_rx     : in    std_logic;
+        uart_tx     : out   std_logic;
+        
+        -- Salida al Servo
+        servo_pin   : out   std_logic;
+        
+        -- I2C OLED
+        sda_pin     : inout std_logic;
+        scl_pin     : inout std_logic
+    );
+end entity;
+
+architecture rtl of servo_ua is
+
+    -- Señal "puente" para llevar el dato del Nios al PWM
+    signal w_angle_connection : std_logic_vector(7 downto 0);
+    
+    -- Señales internas para I2C (si tu IP I2C separa in/out)
+    signal sda_in, sda_out, sda_oe : std_logic;
+    signal scl_in, scl_out, scl_oe : std_logic;
+
+    component Nios_System is
+        port (
+            clk_clk                         : in  std_logic;
+            reset_reset_n                   : in  std_logic;
+            uart_external_connection_rxd    : in  std_logic;
+            uart_external_connection_txd    : out std_logic;
+            
+            -- El PIO que creamos en Qsys sale por aquí:
+            pio_servo_angle_external_connection_export : out std_logic_vector(7 downto 0);
+            
+            -- Asumiendo que tu IP I2C en Qsys tiene estas señales
+            i2c_sda_in  : in  std_logic;
+            i2c_scl_in  : in  std_logic;
+            i2c_sda_out : out std_logic;
+            i2c_scl_out : out std_logic;
+            i2c_sda_oe  : out std_logic; -- Output Enable
+            i2c_scl_oe  : out std_logic
+        );
+    end component;
+
+begin
+
+    -- 1. INSTANCIA DEL SISTEMA NIOS (QSYS)
+    u0 : component Nios_System
+        port map (
+            clk_clk                         => clk,
+            reset_reset_n                   => reset_n,
+            uart_external_connection_rxd    => uart_rx,
+            uart_external_connection_txd    => uart_tx,
+            
+            -- ¡AQUÍ ESTÁ LA CLAVE! Conectamos el PIO al cable interno
+            pio_servo_angle_external_connection_export => w_angle_connection,
+            
+            -- Conexiones I2C internas
+            i2c_sda_in => sda_in, i2c_scl_in => scl_in,
+            i2c_sda_out => sda_out, i2c_scl_out => scl_out,
+            i2c_sda_oe => sda_oe, i2c_scl_oe => scl_oe
+        );
+
+    -- 2. INSTANCIA DEL HARDWARE PWM (Tu archivo servo_pwm.vhd)
+    pwm_inst : entity work.servo_pwm
+        port map (
+            clk      => clk,
+            reset_n  => reset_n,
+            angle    => w_angle_connection, -- Recibe el valor del cable interno
+            pwm_out  => servo_pin           -- Sale al pin físico del motor
+        );
+
+    -- 3. WRAPPER TRI-STATE (Para el OLED I2C)
+    -- Esto permite que la línea sea bidireccional (Open Drain simulado)
+    sda_pin <= '0' when (sda_oe = '1' and sda_out = '0') else 'Z';
+    sda_in  <= sda_pin;
+    
+    scl_pin <= '0' when (scl_oe = '1' and scl_out = '0') else 'Z';
+    scl_in  <= scl_pin;
+
+end rtl;

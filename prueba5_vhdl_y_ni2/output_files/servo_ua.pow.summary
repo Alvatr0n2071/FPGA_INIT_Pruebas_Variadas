@@ -1,0 +1,12 @@
+Power Analyzer Status : Successful - Wed Dec 24 19:13:25 2025
+Quartus Prime Version : 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+Revision Name : servo_ua
+Top-level Entity Name : servo_ua_top
+Family : MAX 10
+Device : 10M08SCE144C8G
+Power Models : Final
+Total Thermal Power Dissipation : 122.94 mW
+Core Dynamic Thermal Power Dissipation : 1.61 mW
+Core Static Thermal Power Dissipation : 110.63 mW
+I/O Thermal Power Dissipation : 10.70 mW
+Power Estimation Confidence : Low: user provided insufficient toggle rate data

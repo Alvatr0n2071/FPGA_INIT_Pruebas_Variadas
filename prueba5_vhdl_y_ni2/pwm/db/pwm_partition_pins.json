@@ -1,0 +1,53 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "pwm_out",
+					"strict" : false
+				},
+				{
+					"name" : "reset_n",
+					"strict" : false
+				},
+				{
+					"name" : "angle[7]",
+					"strict" : false
+				},
+				{
+					"name" : "angle[6]",
+					"strict" : false
+				},
+				{
+					"name" : "angle[4]",
+					"strict" : false
+				},
+				{
+					"name" : "angle[5]",
+					"strict" : false
+				},
+				{
+					"name" : "angle[3]",
+					"strict" : false
+				},
+				{
+					"name" : "angle[2]",
+					"strict" : false
+				},
+				{
+					"name" : "angle[0]",
+					"strict" : false
+				},
+				{
+					"name" : "angle[1]",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

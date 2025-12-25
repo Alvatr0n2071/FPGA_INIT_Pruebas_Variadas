@@ -1,0 +1,110 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity servo_ua_top is
+    port (
+        -- Entradas físicas de la placa
+        clk         : in    std_logic; -- Reloj 50 MHz
+        reset_n     : in    std_logic; -- Botón de reset
+        
+        -- UART (Conexión a PC/MATLAB)
+        uart_rxd    : in    std_logic;
+        uart_txd    : out   std_logic;
+        
+        -- Salida al Servomotor
+        servo_pin   : out   std_logic;
+        
+        -- I2C (Conexión a OLED)
+        sda_pin     : inout std_logic;
+        scl_pin     : inout std_logic
+    );
+end entity;
+
+architecture rtl of servo_ua_top is
+
+    -- 1. Declaración del componente NIOS II (Tal cual lo generaste en Qsys)
+    component servo_ua is
+        port (
+            clk_clk                          : in  std_logic := '0';
+            reset_reset_n                    : in  std_logic := '0';
+            
+            -- I2C: Nota cómo coinciden los nombres con tu entity
+            i2c_0_i2c_serial_sda_in          : in  std_logic := '0';
+            i2c_0_i2c_serial_scl_in          : in  std_logic := '0';
+            i2c_0_i2c_serial_sda_oe          : out std_logic;
+            i2c_0_i2c_serial_scl_oe          : out std_logic;
+            
+            -- PIO: Salida de 8 bits para el ángulo
+            pio_0_external_connection_export : out std_logic_vector(7 downto 0);
+            
+            -- UART
+            uart_0_external_connection_rxd   : in  std_logic := '0';
+            uart_0_external_connection_txd   : out std_logic
+        );
+    end component;
+
+    -- 2. Declaración del componente PWM (Tu archivo servo_pwm.vhd)
+    component pwm is
+        port (
+            clk      : in  std_logic;
+            reset_n  : in  std_logic;
+            angle    : in  std_logic_vector(7 downto 0);
+            pwm_out  : out std_logic
+        );
+    end component;
+
+    -- Señales internas de conexión
+    signal w_angle_from_nios : std_logic_vector(7 downto 0);
+    
+    -- Señales para manejar el I2C Tri-state
+    signal i2c_sda_oe_int : std_logic;
+    signal i2c_scl_oe_int : std_logic;
+
+begin
+
+    -- ============================================================
+    -- INSTANCIA 1: Procesador Nios II (servo_ua)
+    -- ============================================================
+    u0 : component servo_ua
+        port map (
+            clk_clk                          => clk,
+            reset_reset_n                    => reset_n,
+            
+            -- Conexión UART
+            uart_0_external_connection_rxd   => uart_rxd,
+            uart_0_external_connection_txd   => uart_txd,
+            
+            -- Conexión PIO (Sale del Nios -> va al cable w_angle)
+            pio_0_external_connection_export => w_angle_from_nios,
+            
+            -- Conexión I2C (Mapeo interno)
+            i2c_0_i2c_serial_sda_in          => sda_pin,      -- Lee del pin real
+            i2c_0_i2c_serial_scl_in          => scl_pin,      -- Lee del pin real
+            i2c_0_i2c_serial_sda_oe          => i2c_sda_oe_int, -- Controla el buffer
+            i2c_0_i2c_serial_scl_oe          => i2c_scl_oe_int  -- Controla el buffer
+        );
+
+    -- ============================================================
+    -- INSTANCIA 2: Controlador PWM de Hardware
+    -- ============================================================
+    pwm_inst : component pwm
+        port map (
+            clk      => clk,
+            reset_n  => reset_n,
+            angle    => w_angle_from_nios, -- Recibe el valor desde el PIO del Nios
+            pwm_out  => servo_pin          -- Sale al mundo real
+        );
+
+    -- ============================================================
+    -- LÓGICA TRI-STATE PARA I2C (Open Drain)
+    -- ============================================================
+    -- El protocolo I2C funciona poniendo la línea en '0' o dejándola flotar ('Z').
+    -- Nunca se fuerza un '1' (para eso están las resistencias pull-up externas).
+    
+    -- Si el Nios dice "Enable Output" (oe='1'), forzamos '0'.
+    -- Si no, dejamos 'Z' (alta impedancia).
+    
+    sda_pin <= '0' when i2c_sda_oe_int = '1' else 'Z';
+    scl_pin <= '0' when i2c_scl_oe_int = '1' else 'Z';
+
+end rtl;
